@@ -4,6 +4,8 @@ from django.db import models
 
 class Product(models.Model):
     PRDName = models.CharField(max_length=100, verbose_name="Product Name")
+    PRDCategory = models.ForeignKey('Category', on_delete=models.CASCADE, blank=True, null=True)
+    PRDBrand = models.ForeignKey('settings.Brand', on_delete=models.CASCADE, blank=True, null=True)
     PRDDesc = models.TextField(verbose_name="Product Description")
     PRDPrice = models.DecimalField(max_digits=5, decimal_places=2, verbose_name="Price")
     PRDCost = models.DecimalField(max_digits=5, decimal_places=2, verbose_name="Cost")
