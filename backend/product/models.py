@@ -11,6 +11,7 @@ class Product(models.Model):
     PRDCost = models.DecimalField(max_digits=5, decimal_places=2, verbose_name="Cost")
     PRDDiscount = models.DecimalField(default=0, max_digits=2,decimal_places=0, verbose_name="Product Discount")
     PRDInstock = models.BooleanField(default=True, verbose_name="Product Stock")
+    PRDIImage = models.ImageField(upload_to="product/",default='null', verbose_name="Image")
     PRDCreated = models.DateTimeField(verbose_name="Created At")
 
     class Meta:
@@ -19,13 +20,6 @@ class Product(models.Model):
 
     def __str__(self):
         return self.PRDName
-
-class ProductImage(models.Model):
-    PRDIproduct = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Product")
-    PRDIImage = models.ImageField(upload_to="product/", verbose_name="Image")
-
-    def __str__(self):
-        return str(self.PRDIproduct)
 
 class Category(models.Model):
     CATName = models.CharField(max_length=100, verbose_name="Category Name")
