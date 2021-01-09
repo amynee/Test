@@ -9,6 +9,8 @@ class Product(models.Model):
     PRDDesc = models.TextField(verbose_name="Product Description")
     PRDPrice = models.DecimalField(max_digits=5, decimal_places=2, verbose_name="Price")
     PRDCost = models.DecimalField(max_digits=5, decimal_places=2, verbose_name="Cost")
+    PRDDiscount = models.DecimalField(default=0, max_digits=2,decimal_places=0, verbose_name="Product Discount")
+    PRDInstock = models.BooleanField(default=True, verbose_name="Product Stock")
     PRDCreated = models.DateTimeField(verbose_name="Created At")
 
     class Meta:
