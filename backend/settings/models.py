@@ -19,7 +19,7 @@ class Variant(models.Model):
 
     class Meta:
         verbose_name = "Variant"
-        verbose_name_plural = "Variants"
+        verbose_name_plural = "Variants" 
 
     def __str__(self):
         return self.VARName
