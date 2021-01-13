@@ -44,7 +44,7 @@ export default {
     methods: {
         addToCart() {
             var item = JSON.parse(sessionStorage.getItem('cart'))
-            item.push({nom: this.name, description: this.description, prix: this.generatedPrice})
+            item.push({nom: this.name,quantite: 1, description: this.description, prix: this.generatedPrice})
             sessionStorage.setItem('cart', JSON.stringify(item))
         }
     }

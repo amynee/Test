@@ -2,9 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import './assets/app.scss'
 import router from './router'
-import VueSession from 'vue-session'
-Vue.use(VueSession)
-
+sessionStorage.setItem('cart', JSON.stringify([]))
 
 Vue.config.productionTip = false
 

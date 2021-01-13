@@ -3,16 +3,16 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th scope="col">Paniers</th>
+          <th scope="col">Quantité</th>
           <th scope="col">Nom De Produit</th>
           <th scope="col">Description</th>
-          <th scope="col">Prix</th>
+          <th scope="col">Prix(Unité)</th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody v-for="item in cart" v-bind:key="item.nom">
         <tr>
-          <th scope="row">1</th>
+          <th scope="row">{{ item.quantite }} <button @click="addQty(item)" class="btn btn-success btn-sm">+</button> <button @click="removeQty(item)" class="btn btn-danger btn-sm">-</button></th>
           <td>{{ item.nom }}</td>
           <td>{{ item.description }}</td>
           <td>{{ item.prix }}</td>
@@ -36,18 +36,44 @@ export default {
   data() { 
       return {
         cart: JSON.parse(sessionStorage.getItem('cart')),
-        totalPrice: 0
+        totalPrice: 0,
       }
+  },
+  watch: {
+    totalPrice() {
+      this.totalPrice = 0
+    },
   },
   computed: {
     getTotalPrice() {
       this.cart.map((item) => {
-        this.totalPrice += item.prix
+        this.totalPrice += item.prix * item.quantite
       })
-    return this.totalPrice
-    }
+      return this.totalPrice
+    },
   },
   methods: {
+    deleteItem(cartItem) {
+      let changedCart = JSON.parse(sessionStorage.getItem('cart'))
+      for (var key in changedCart) {
+          if( changedCart[key].nom === cartItem.nom ) {
+            changedCart.splice(key,1)
+            sessionStorage.setItem('cart', JSON.stringify(changedCart))
+            this.cart = JSON.parse(sessionStorage.getItem('cart'))
+          }
+      }
+      return this.cart
+    },
+    addQty(item) {
+      return item.quantite++
+    },
+    removeQty(item) {
+      if( item.quantite <= 1 ) {
+        item.quantite = 1
+      } else {
+        item.quantite--
+      }
+    }
   }
 }
 </script>
